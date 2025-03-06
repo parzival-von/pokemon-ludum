@@ -1,9 +1,11 @@
 <template>
   <div>
-    <h1 class="text-3xl font-bold underline">Hello world!</h1>
+    <PokemonLudum />
   </div>
 </template>
 
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import PokemonLudum from './modulorum/pokemons/paginae/PokemonLudum.vue';
+</script>
 
 <style scoped></style>
