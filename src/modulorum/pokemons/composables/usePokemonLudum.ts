@@ -1,6 +1,7 @@
 import { computed, onMounted, ref } from "vue"
 import { LudumStatus, type PokemonListaResponsio, type Pokemon } from "../interfaces";
 import { pokemonApi } from "@/api/pokemonApi";
+import confetti from "canvas-confetti";
 
  
 export const usePokemonLudum = () => {
@@ -40,6 +41,24 @@ const sequentiOptiones = (quot: number = 4) => {
     pokemons.value = pokemons.value.slice(quot);
 }
  
+const examineResponsio = (id: number) => {
+    const vicit = temerePokemon.value.id === id;
+    if (vicit) {
+        ludumStatus.value = LudumStatus.Vicit;
+        confetti({
+            particleCount: 300,
+            spread: 150,
+            origin: { y: 0.6 }
+        });
+
+        return;
+    }
+    else{
+        ludumStatus.value = LudumStatus.Perdidit;
+
+    }
+}
+
 onMounted(async() => {
     await new Promise((r) => setTimeout(r, 500));
     pokemons.value = await obtinePokemons();
@@ -53,6 +72,7 @@ onMounted(async() => {
         estPortat,
         pokemonOptiones,
         sequentiOptiones,
-        temerePokemon
+        temerePokemon,
+        examineResponsio,
     }
 }
